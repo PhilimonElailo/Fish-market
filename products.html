@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SilverFin Market | Products</title>
+  <link rel="icon" type="image/jpeg" href="assets/images/icon.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="products" class="page-products">
+  <div class="page-shell">
+    <header class="site-header">
+      <nav class="navbar container">
+        <a href="index.html" class="brand">
+          <img src="assets/images/logo.png" alt="SilverFin Market logo" class="brand-logo">
+          <span>
+            <strong>SilverFin Market</strong>
+            <small>Lake Turkana, Kenya</small>
+          </span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="products.html" class="active">Products</a>
+          <a href="cart.html">Cart <span id="nav-cart-count" class="nav-pill">0</span></a>
+          <a href="admin.html" data-admin-link class="hidden">Dock Control</a>
+          <button id="theme-toggle" class="ghost-button" type="button" aria-label="Toggle theme">Night Mode</button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="products-water">
+      <section class="products-hero">
+        <div class="container">
+          <div class="page-intro page-intro-light">
+            <p class="section-label">Available Fish</p>
+            <h1>Browse fresh fish ready for households, hotels, restaurants, and resellers.</h1>
+            <p>Choose from whole fish, premium market selections, and everyday favorites priced clearly in KES.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="controls-section container">
+        <div>
+          <p class="section-label">Market Board</p>
+          <h2>Today&apos;s available fish</h2>
+        </div>
+        <div class="toolbar">
+          <label class="search-field">
+            <span>Search</span>
+            <input id="search-input" type="search" placeholder="Search fish name">
+          </label>
+          <label class="filter-field">
+            <span>Max price</span>
+            <select id="price-filter">
+              <option value="all">All prices</option>
+              <option value="400">Up to KES 400</option>
+              <option value="600">Up to KES 600</option>
+              <option value="900">Up to KES 900</option>
+              <option value="1300">Up to KES 1,300</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section class="container">
+        <div id="product-grid" class="product-grid"></div>
+        <p id="product-empty" class="empty-state hidden">No fish products match that search right now.</p>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

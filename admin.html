@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SilverFin Market | Dock Control</title>
+  <link rel="icon" type="image/jpeg" href="assets/images/icon.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="admin" class="page-admin">
+  <div class="page-shell">
+    <header class="site-header">
+      <nav class="navbar container">
+        <a href="index.html" class="brand">
+          <img src="assets/images/logo.png" alt="SilverFin Market logo" class="brand-logo">
+          <span>
+            <strong>SilverFin Market</strong>
+            <small>Lake Turkana, Kenya</small>
+          </span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="cart.html">Cart <span id="nav-cart-count" class="nav-pill">0</span></a>
+          <a href="admin.html" class="active">Dock Control</a>
+          <button id="admin-logout" class="secondary-button" type="button">Logout Admin</button>
+          <button id="theme-toggle" class="ghost-button" type="button" aria-label="Toggle theme">Night Mode</button>
+        </div>
+      </nav>
+    </header>
+
+    <div id="admin-gate" class="admin-gate">
+      <div class="admin-gate-card">
+        <p class="section-label">Restricted Access</p>
+        <h2>Dock Control is for staff only</h2>
+        <p>Enter the admin passcode to manage stock and pricing.</p>
+        <form id="admin-login-form" class="admin-login-form">
+          <label>
+            <span>Passcode</span>
+            <input id="admin-passcode" type="password" placeholder="Enter passcode" required>
+          </label>
+          <button type="submit" class="primary-button full-width">Unlock Admin</button>
+          <p id="admin-gate-message" class="gate-message hidden"></p>
+        </form>
+      </div>
+    </div>
+
+    <main id="admin-content" class="section-stack hidden">
+      <section class="admin-hero">
+        <div class="admin-hero-overlay"></div>
+        <div class="container admin-hero-content">
+          <div class="page-intro page-intro-light">
+            <p class="section-label">Dock Control</p>
+            <h1>Manage stock from a dashboard that feels different from the storefront.</h1>
+            <p>The admin page now reads more like an operations space, with a full-width background section, stock overview, and the product editor below.</p>
+          </div>
+          <div class="dashboard-strip">
+            <div class="dashboard-chip">
+              <span>Products</span>
+              <strong id="dashboard-product-count">0</strong>
+            </div>
+            <div class="dashboard-chip">
+              <span>Cart items live</span>
+              <strong id="dashboard-cart-count">0</strong>
+            </div>
+            <div class="dashboard-chip">
+              <span>Storage</span>
+              <strong>Local</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="container admin-layout admin-layout-alt">
+        <form id="admin-form" class="form-card form-card-dark">
+          <input id="product-id" type="hidden">
+          <p class="section-label">Stock Editor</p>
+          <label>
+            <span>Fish name</span>
+            <input id="product-name" type="text" placeholder="e.g. Tilapia" required>
+          </label>
+          <label>
+            <span>Price per kg (KES)</span>
+            <input id="product-price" type="number" min="1" placeholder="e.g. 550" required>
+          </label>
+          <label>
+            <span>Image URL or local path</span>
+            <input id="product-image" type="text" placeholder="assets/images/your-file.jpg">
+          </label>
+          <div class="button-row">
+            <button type="submit" class="primary-button">Save Product</button>
+            <button id="cancel-edit" type="button" class="secondary-button hidden">Cancel Edit</button>
+          </div>
+        </form>
+
+        <div class="admin-products-wrap admin-products-panel">
+          <div class="admin-header">
+            <p class="section-label">Catalog</p>
+            <h2>Current stock</h2>
+            <p>Use this panel to keep the storefront fresh without touching code.</p>
+          </div>
+          <div id="admin-products" class="admin-products"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

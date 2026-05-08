@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SilverFin Market | Order Lounge</title>
+  <link rel="icon" type="image/jpeg" href="assets/images/icon.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="checkout" class="page-checkout">
+  <div class="page-shell">
+    <header class="site-header">
+      <nav class="navbar container">
+        <a href="index.html" class="brand">
+          <img src="assets/images/logo.png" alt="SilverFin Market logo" class="brand-logo">
+          <span>
+            <strong>SilverFin Market</strong>
+            <small>Lake Turkana, Kenya</small>
+          </span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="cart.html">Cart <span id="nav-cart-count" class="nav-pill">0</span></a>
+          <a href="admin.html" data-admin-link class="hidden">Dock Control</a>
+          <button id="theme-toggle" class="ghost-button" type="button" aria-label="Toggle theme">Night Mode</button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="section-stack">
+      <section class="checkout-hero">
+        <div class="checkout-hero-overlay"></div>
+        <div class="container checkout-hero-content">
+          <div class="page-intro page-intro-light">
+            <p class="section-label">Place Your Order</p>
+            <h1>Complete your fish order with SilverFin Market.</h1>
+            <p>Confirm your details, review your selected fish, and send your order for follow-up.</p>
+          </div>
+          <div class="checkout-notes">
+            <div>
+              <strong>Simple ordering</strong>
+              <span>Submit your details quickly and review your order total in KES.</span>
+            </div>
+            <div>
+              <strong>Clear summary</strong>
+              <span>Every selected item remains visible so you can confirm your order before sending it.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="container checkout-layout checkout-layout-alt">
+        <form id="checkout-form" class="form-card form-card-glass">
+          <label>
+            <span>Customer name</span>
+            <input id="customer-name" type="text" placeholder="Enter your full name" required>
+          </label>
+          <label>
+            <span>Phone number</span>
+            <input id="customer-phone" type="tel" placeholder="07XX XXX XXX" required>
+          </label>
+          <button type="submit" class="primary-button">Place Order</button>
+          <p id="checkout-message" class="success-message hidden"></p>
+        </form>
+
+        <aside class="summary-card summary-card-dark">
+          <h2>Order summary</h2>
+          <div id="checkout-items" class="checkout-items"></div>
+          <div class="summary-row total-row">
+            <span>Total</span>
+            <strong id="checkout-total">KES 0</strong>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

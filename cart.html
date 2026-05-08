@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SilverFin Market | Cart</title>
+  <link rel="icon" type="image/jpeg" href="assets/images/icon.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="cart" class="page-cart">
+  <div class="page-shell">
+    <header class="site-header">
+      <nav class="navbar container">
+        <a href="index.html" class="brand">
+          <img src="assets/images/logo.png" alt="SilverFin Market logo" class="brand-logo">
+          <span>
+            <strong>SilverFin Market</strong>
+            <small>Lake Turkana, Kenya</small>
+          </span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="cart.html" class="active">Cart <span id="nav-cart-count" class="nav-pill">0</span></a>
+          <a href="admin.html" data-admin-link class="hidden">Dock Control</a>
+          <button id="theme-toggle" class="ghost-button" type="button" aria-label="Toggle theme">Night Mode</button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container section-stack">
+      <section class="page-intro">
+        <p class="section-label">Cart</p>
+        <h1>Your selected fish order</h1>
+        <p>Review your chosen fish, update quantities, and continue when you are ready to place your order.</p>
+      </section>
+
+      <section class="cart-layout">
+        <div id="cart-items" class="cart-items"></div>
+        <aside class="summary-card">
+          <h2>Order summary</h2>
+          <div class="summary-row">
+            <span>Items</span>
+            <strong id="summary-items">0</strong>
+          </div>
+          <div class="summary-row">
+            <span>Total</span>
+            <strong id="summary-total">KES 0</strong>
+          </div>
+          <a href="checkout.html" class="primary-button full-width">Go to Order Lounge</a>
+          <a href="index.html" class="text-link">Continue Shopping</a>
+        </aside>
+      </section>
+      <p id="cart-empty" class="empty-state hidden">Your cart is empty. Add fish from the products page to begin your order.</p>
+    </main>
+  </div>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

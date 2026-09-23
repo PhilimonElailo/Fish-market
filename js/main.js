@@ -32,6 +32,13 @@ function renderProducts(productsToRender = loadProducts()) {
   `).join("");
 }
 
+function refreshProductCatalog() {
+  if (document.body.dataset.page === "home" || document.body.dataset.page === "products") {
+    renderProducts();
+    updateNavCartCount();
+  }
+}
+
 function handleAddToCart(productId) {
   addToCart(productId);
   updateNavCartCount();
@@ -145,6 +152,30 @@ function handleCheckoutSubmit(event) {
   message.classList.remove("hidden");
 }
 
+function handleMemberRegistration(event) {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  const message = document.getElementById("member-register-message");
+  const payload = {
+    id: Date.now(),
+    name: document.getElementById("member-name").value.trim(),
+    contact: document.getElementById("member-contact").value.trim(),
+    idNumber: document.getElementById("member-id").value.trim(),
+    role: document.getElementById("member-role").value.trim(),
+    status: "pending",
+    submittedAt: new Date().toISOString()
+  };
+
+  const requests = loadMemberRequests();
+  requests.push(payload);
+  saveMemberRequests(requests);
+
+  form.reset();
+  message.textContent = "Thank you. Your BMU membership request has been received and is awaiting review.";
+  message.classList.remove("hidden");
+}
+
 function applyTheme() {
   const savedTheme = loadFromLocalStorage(STORAGE_KEYS.theme, "light");
   document.body.classList.toggle("dark-mode", savedTheme === "dark");
@@ -209,6 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateAdminLinkVisibility();
 
   document.getElementById("theme-toggle")?.addEventListener("click", toggleTheme);
+  document.getElementById("member-register-form")?.addEventListener("submit", handleMemberRegistration);
 
   const page = document.body.dataset.page;
 
@@ -226,4 +258,11 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCheckoutPage();
     document.getElementById("checkout-form")?.addEventListener("submit", handleCheckoutSubmit);
   }
+
+  window.addEventListener("productsUpdated", refreshProductCatalog);
+  window.addEventListener("storage", (event) => {
+    if (event.key === STORAGE_KEYS.products) {
+      refreshProductCatalog();
+    }
+  });
 });

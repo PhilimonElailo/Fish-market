@@ -1,6 +1,6 @@
-# SilverFin Market
+# Longech BMU Fish Market
 
-A static fish market website for SilverFin Market, Lake Turkana, Kenya.
+A static fish market website for Longech Beach Management Unit, Lake Turkana, Kenya.
 
 ## Pages
 

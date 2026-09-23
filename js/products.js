@@ -3,22 +3,24 @@ const STORAGE_KEYS = {
   cart: "fishMarketCart",
   orders: "fishMarketOrders",
   theme: "fishMarketTheme",
-  adminAuth: "fishMarketAdminAuth"
+  adminAuth: "fishMarketAdminAuth",
+  memberRequests: "longechMemberRequests",
+  activities: "longechActivities"
 };
 
 const BRAND = {
-  name: "SilverFin Market",
-  short: "SF"
+  name: "Longech Beach Management Unit",
+  short: "Longech BMU"
 };
 
-const ADMIN_PASSCODE = "silverfin-2026";
+const ADMIN_PASSCODE = "LongechBMU@2026";
 
 const defaultProducts = [
   {
     id: 1,
     name: "Nile Perch",
     price: 500,
-    image: "assets/images/nile-perch.jpg",
+    image: "assets/images/nileperch.webp",
     imageStyle: "contain"
   },
   {
@@ -100,6 +102,27 @@ const defaultProducts = [
   }
 ];
 
+const defaultActivities = [
+  {
+    id: 1,
+    title: "Beach cleaning drive",
+    details: "Saturday shoreline cleanup at Longech Beach with youth volunteers and fishing groups.",
+    date: "2026-09-27"
+  },
+  {
+    id: 2,
+    title: "Water level advisory",
+    details: "Public notice issued on rising water levels and climate risks affecting Lake Turkana communities.",
+    date: "2026-09-21"
+  },
+  {
+    id: 3,
+    title: "Sustainable fishing sensitization",
+    details: "BMU officers hosted a community session on responsible gear use and fish conservation.",
+    date: "2026-09-14"
+  }
+];
+
 function saveToLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
@@ -132,16 +155,34 @@ function loadProducts() {
     return [...defaultProducts];
   }
 
-  const customProducts = storedProducts.filter((product) => !defaultProducts.some((defaultProduct) => defaultProduct.id === product.id));
-  const normalizedProducts = [...defaultProducts, ...customProducts];
-  const needsCatalogSync = JSON.stringify(normalizedProducts) !== JSON.stringify(storedProducts);
+  const seenIds = new Set(storedProducts.map((product) => Number(product.id)));
+  const missingDefaults = defaultProducts.filter((defaultProduct) => !seenIds.has(Number(defaultProduct.id)));
 
-  if (needsCatalogSync) {
-    saveToLocalStorage(STORAGE_KEYS.products, normalizedProducts);
-    return normalizedProducts;
+  if (!missingDefaults.length) {
+    return storedProducts;
   }
 
-  return storedProducts;
+  const mergedProducts = [...storedProducts, ...missingDefaults];
+  saveToLocalStorage(STORAGE_KEYS.products, mergedProducts);
+  return mergedProducts;
+}
+
+function loadMemberRequests() {
+  const stored = loadFromLocalStorage(STORAGE_KEYS.memberRequests, []);
+  return Array.isArray(stored) ? stored : [];
+}
+
+function saveMemberRequests(members) {
+  saveToLocalStorage(STORAGE_KEYS.memberRequests, members);
+}
+
+function loadActivities() {
+  const stored = loadFromLocalStorage(STORAGE_KEYS.activities, defaultActivities);
+  return Array.isArray(stored) ? stored : defaultActivities;
+}
+
+function saveActivities(activities) {
+  saveToLocalStorage(STORAGE_KEYS.activities, activities);
 }
 
 function getProductById(productId) {
@@ -150,6 +191,7 @@ function getProductById(productId) {
 
 function saveProducts(products) {
   saveToLocalStorage(STORAGE_KEYS.products, products);
+  window.dispatchEvent(new CustomEvent("productsUpdated", { detail: products }));
 }
 
 function formatKES(amount) {

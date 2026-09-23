@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SilverFin Market | Dock Control</title>
-  <link rel="icon" type="image/jpeg" href="assets/images/icon.jpg">
+  <title>Longech BMU | Management Portal</title>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -15,17 +15,16 @@
     <header class="site-header">
       <nav class="navbar container">
         <a href="index.html" class="brand">
-          <img src="assets/images/logo.png" alt="SilverFin Market logo" class="brand-logo">
+          <img src="assets/images/logo.png" alt="Longech BMU logo" class="brand-logo">
           <span>
-            <strong>SilverFin Market</strong>
+            <strong>Longech BMU</strong>
             <small>Lake Turkana, Kenya</small>
           </span>
         </a>
         <div class="nav-links">
           <a href="index.html">Home</a>
-          <a href="products.html">Products</a>
-          <a href="cart.html">Cart <span id="nav-cart-count" class="nav-pill">0</span></a>
-          <a href="admin.html" class="active">Dock Control</a>
+          <a href="products.html">Longech BMU Fish Market</a>
+          <a href="admin.html" class="active">Management Portal</a>
           <button id="admin-logout" class="secondary-button" type="button">Logout Admin</button>
           <button id="theme-toggle" class="ghost-button" type="button" aria-label="Toggle theme">Night Mode</button>
         </div>
@@ -35,14 +34,14 @@
     <div id="admin-gate" class="admin-gate">
       <div class="admin-gate-card">
         <p class="section-label">Restricted Access</p>
-        <h2>Dock Control is for staff only</h2>
-        <p>Enter the admin passcode to manage stock and pricing.</p>
+        <h2>BMU Management Portal</h2>
+        <p>Enter the admin passcode to manage records, stock, and community updates.</p>
         <form id="admin-login-form" class="admin-login-form">
           <label>
             <span>Passcode</span>
             <input id="admin-passcode" type="password" placeholder="Enter passcode" required>
           </label>
-          <button type="submit" class="primary-button full-width">Unlock Admin</button>
+          <button type="submit" class="primary-button full-width">Unlock Portal</button>
           <p id="admin-gate-message" class="gate-message hidden"></p>
         </form>
       </div>
@@ -53,9 +52,9 @@
         <div class="admin-hero-overlay"></div>
         <div class="container admin-hero-content">
           <div class="page-intro page-intro-light">
-            <p class="section-label">Dock Control</p>
-            <h1>Manage stock from a dashboard that feels different from the storefront.</h1>
-            <p>The admin page now reads more like an operations space, with a full-width background section, stock overview, and the product editor below.</p>
+            <p class="section-label">Community Dashboard</p>
+            <h1>Operations and member management for Longech Beach Management Unit.</h1>
+            <p>Track sales, review registrations, and coordinate beach protection campaigns from a single management workspace.</p>
           </div>
           <div class="dashboard-strip">
             <div class="dashboard-chip">
@@ -74,35 +73,110 @@
         </div>
       </section>
 
-      <section class="container admin-layout admin-layout-alt">
-        <form id="admin-form" class="form-card form-card-dark">
-          <input id="product-id" type="hidden">
-          <p class="section-label">Stock Editor</p>
-          <label>
-            <span>Fish name</span>
-            <input id="product-name" type="text" placeholder="e.g. Tilapia" required>
-          </label>
-          <label>
-            <span>Price per kg (KES)</span>
-            <input id="product-price" type="number" min="1" placeholder="e.g. 550" required>
-          </label>
-          <label>
-            <span>Image URL or local path</span>
-            <input id="product-image" type="text" placeholder="assets/images/your-file.jpg">
-          </label>
-          <div class="button-row">
-            <button type="submit" class="primary-button">Save Product</button>
-            <button id="cancel-edit" type="button" class="secondary-button hidden">Cancel Edit</button>
-          </div>
-        </form>
+      <section class="container admin-metrics">
+        <div class="metric-card">
+          <span>Total Members</span>
+          <strong id="metric-total-members">0</strong>
+        </div>
+        <div class="metric-card">
+          <span>Approved Members</span>
+          <strong id="metric-approved-members">0</strong>
+        </div>
+        <div class="metric-card">
+          <span>Total Sales</span>
+          <strong id="metric-total-sales">KES 0</strong>
+        </div>
+        <div class="metric-card">
+          <span>Cleanup Campaigns</span>
+          <strong id="metric-cleanups">0</strong>
+        </div>
+      </section>
 
-        <div class="admin-products-wrap admin-products-panel">
-          <div class="admin-header">
-            <p class="section-label">Catalog</p>
-            <h2>Current stock</h2>
-            <p>Use this panel to keep the storefront fresh without touching code.</p>
+      <section class="container admin-tabs-wrap">
+        <div class="admin-tabs" role="tablist" aria-label="Management portal sections">
+          <button type="button" class="admin-tab active" data-tab="products">Products & Stock</button>
+          <button type="button" class="admin-tab" data-tab="members">Member Requests</button>
+          <button type="button" class="admin-tab" data-tab="activities">Activities & Notices</button>
+        </div>
+
+        <div id="products-tab" class="admin-tab-panel">
+          <div class="admin-layout admin-layout-alt">
+            <form id="admin-form" class="form-card form-card-dark">
+              <input id="product-id" type="hidden">
+              <p class="section-label">Stock Editor</p>
+              <label>
+                <span>Fish name</span>
+                <input id="product-name" type="text" placeholder="e.g. Tilapia" required>
+              </label>
+              <label>
+                <span>Price per kg (KES)</span>
+                <input id="product-price" type="number" min="1" placeholder="e.g. 550" required>
+              </label>
+              <label>
+                <span>Image URL or local path</span>
+                <input id="product-image" type="text" placeholder="assets/images/your-file.jpg">
+              </label>
+              <div class="button-row">
+                <button type="submit" class="primary-button">Save Product</button>
+                <button id="cancel-edit" type="button" class="secondary-button hidden">Cancel Edit</button>
+              </div>
+            </form>
+
+            <div class="admin-products-wrap admin-products-panel">
+              <div class="admin-header">
+                <p class="section-label">Catalog</p>
+                <h2>Current stock</h2>
+                <p>Use this panel to keep the fish market current and pricing aligned with community trade.</p>
+                <p class="reorder-hint">Drag cards to reorder or use the arrow buttons to place products in the exact sequence you want customers to see.</p>
+              </div>
+              <div id="admin-products" class="admin-products"></div>
+            </div>
           </div>
-          <div id="admin-products" class="admin-products"></div>
+        </div>
+
+        <div id="members-tab" class="admin-tab-panel hidden">
+          <div class="admin-table-card">
+            <div class="admin-header">
+              <p class="section-label">Registrations</p>
+              <h2>Member applications</h2>
+            </div>
+            <table class="member-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Contact</th>
+                  <th>ID</th>
+                  <th>Role / Activity</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="member-requests-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="activities-tab" class="admin-tab-panel hidden">
+          <div class="admin-activity-grid">
+            <form id="activity-form" class="form-card form-card-dark">
+              <p class="section-label">Notice Board</p>
+              <label>
+                <span>Title</span>
+                <input id="activity-title" type="text" placeholder="Cleanup drive, alert, notice" required>
+              </label>
+              <label>
+                <span>Date</span>
+                <input id="activity-date" type="date">
+              </label>
+              <label>
+                <span>Details</span>
+                <textarea id="activity-details" rows="5" placeholder="Add activity details or community notice" required></textarea>
+              </label>
+              <button type="submit" class="primary-button">Publish Update</button>
+            </form>
+
+            <div class="admin-activity-list" id="activity-list"></div>
+          </div>
         </div>
       </section>
     </main>
